@@ -20,6 +20,18 @@ services:
       - postgres_data:/var/lib/postgresql/data/
     env_file:
       - .env
+  app:
+    container_name: react-app
+    build:
+      context: ./library_front
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    volumes:
+      - ./library_front:/app
+      - /app/node_modules
+    depends_on:
+      - api
 
 volumes:
   postgres_data:
