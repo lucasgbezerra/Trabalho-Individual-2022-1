@@ -1,12 +1,12 @@
 FROM node:18-alpine
 
-WORKDIR /app
+WORKDIR /frontend
 
 COPY package.json ./
 COPY ./ ./
 
-RUN mkdir -p /app/node_modules
-RUN chown -R node /app/node_modules
+RUN mkdir -p /frontend/node_modules
+RUN chown -R node /frontend/node_modules
 
 RUN npm install --quiet
 
