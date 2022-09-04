@@ -8,36 +8,19 @@ on:
 
 jobs:
   build:
-    name: Build
+    name: Build e Run
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Build Application
-      	run: docker-compose buid
+      - name: Build and run
+        working-directory: ./aplicacao
+        run: docker-compose up --build -d
 
-			- name: Run Application
-				run: docker-compose up -d
-	
-  backend-lint:
-    name: Pylint
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Backend PyLint
-      - uses: actions/setup-python@v4
-				with:
-					python-version: '3.9'
-					cache: 'pip'
-				working-directory: ./library_back
-				run: |
-					pip install pylint
-					pylint **/*.py	  
-
-  backend-lint:
+  frontend-lint:
     name: Eslint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Frontend ESlint
-      	working-directory: ./library_front
-				run: eslint . --ext .js,.jsx,.ts,.tsx
+        working-directory: ./library_front
+        run: eslint . --ext .js,.jsx,.ts,.tsx
