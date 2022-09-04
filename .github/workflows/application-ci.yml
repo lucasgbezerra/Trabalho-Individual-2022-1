@@ -5,33 +5,38 @@ on:
 		branches:
 			- main
 	pull_request:
-		branches:
+  	branches:
 			- main
 			
 jobs:
 	build:
 		runs-on: ubuntu:latest
-	steps:
-		- uses: actions/checkout@v3
-		- name: Build Application
-		  run: docker-compose buid
-		  
-		- name: Run Application
-		  run: docker-compose up -d
-		  
-	lint:
+		steps:
+			- uses: actions/checkout@v3
+			- name: Build Application
+				run: docker-compose buid
+  
+			- name: Run Application
+				run: docker-compose up -d
+    
+	frontend-lint:
 		runs-on: ubuntu:latest
-	steps:
-		- uses: actions/checkout@v3
-		- uses: actions/setup-python@v4
-		- name: Backend PyLint
-		  with:
-		    python-version: '3.10'
-		    cache: 'pip' # caching pip dependencies
-	          working-directory: ./library_back
-		  run: pip install pylint
-		  run: pylint **/*.py
-		  
-		- name: Frontend ESlint
-	          working-directory: ./library_front	
-	          run: eslint . --ext .js,.jsx,.ts,.tsx
+		steps:
+			- uses: actions/checkout@v3
+			- name: Backend PyLint
+			- uses: actions/setup-python@v4
+				with:
+					python-version: '3.9'
+					cache: 'pip' # caching pip dependencies
+				working-directory: ./library_back
+				run: |
+					pip install pylint
+					pylint **/*.py	  
+       
+	backend-lint:
+		runs-on: ubuntu:latest
+			steps:
+				- uses: actions/checkout@v3
+				- name: Frontend ESlint
+					working-directory: ./library_front
+					run: eslint . --ext .js,.jsx,.ts,.tsx
