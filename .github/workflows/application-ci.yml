@@ -21,4 +21,4 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Frontend ESlint
-        run: docker-compose --entrypoint "npm exec eslint ./library_front/src" node
+        run: docker exec react-frontend eslint --fix src/
