@@ -16,7 +16,7 @@ jobs:
         run: docker-compose up --build -d
 
   frontend-lint:
-    name: Eslint
+    name: Frontend Eslint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -26,13 +26,12 @@ jobs:
         run: docker exec react_frontend npx eslint --fix src/
 
   backend-lint:
-    name: Pylint
+    name: Backend Pylint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Build and run
         run: docker-compose up --build -d
       - name: Backend ESlint
-        run: docker exec django pylint src/ books/ accounts/
+        run: docker exec  django flake8 --exit-zero --ignore=E501 src/
 
-  
