@@ -43,4 +43,14 @@ jobs:
       - name: Build and run
         run: docker-compose up --build -d
       - name: Teste fronted
-      run: docker exec react_frontend sh -c "CI=true npm test --watchAll=false"
+        run: docker exec react_frontend sh -c "CI=true npm test --watchAll=false"
+  
+  test-backend:
+    name: Testes backend django
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build and run
+        run: docker-compose up --build -d
+      - name: Teste backend
+        run: docker exec django sh -c "python /library_back/manage.py test"
