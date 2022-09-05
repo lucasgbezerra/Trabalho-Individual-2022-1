@@ -33,4 +33,6 @@ jobs:
       - name: Build and run
         run: docker-compose up --build -d
       - name: Backend ESlint
-        run: docker exec django pylint -j ./src/ ./book ./accounts
+        run: docker exec django pylint src/ books/ accounts/
+
+  
