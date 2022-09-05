@@ -21,7 +21,7 @@ services:
     env_file:
       - .env
   frontend:
-    container_name: react-frontend
+    container_name: react_frontend
     build:
       context: ./library_front
       dockerfile: Dockerfile

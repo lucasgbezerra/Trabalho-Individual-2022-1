@@ -21,4 +21,4 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Frontend ESlint
-        run: docker exec react-frontend eslint --fix src/
+        run: docker exec react_frontend eslint --fix src/
