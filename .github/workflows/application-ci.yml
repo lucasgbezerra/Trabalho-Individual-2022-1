@@ -16,7 +16,7 @@ jobs:
         run: docker-compose up --build -d
 
   frontend-lint:
-    name: Frontend Eslint
+    name: Frontend lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -26,12 +26,21 @@ jobs:
         run: docker exec react_frontend npx eslint --fix src/
 
   backend-lint:
-    name: Backend Pylint
+    name: Backend lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Build and run
         run: docker-compose up --build -d
       - name: Backend ESlint
-        run: docker exec  django flake8 --exit-zero --ignore=E501 src/
+        run: docker exec  django flake8 --exit-zero --ignore=E501 src/ 
 
+  test-frontend:
+    name: Testes frontend reactjs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build and run
+        run: docker-compose up --build -d
+      - name: Teste fronted
+      run: docker exec react_frontend sh -c "CI=true npm test --watchAll=false"
