@@ -20,5 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Build and run
+        run: docker-compose up --build -d
       - name: Frontend ESlint
-        run: docker exec react_frontend eslint --fix src/
+        run: docker exec react_frontend npx eslint --fix src/
